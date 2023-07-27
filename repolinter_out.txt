@@ -1,0 +1,32 @@
+Target directory: /Users/duthiee/code/extending_context_length_os_llms
+Axiom language failed to run with error: Linguist not installed
+Axiom license failed to run with error: Licensee not installed
+Lint:
+✔  license-file-exists: Found file (LICENSE)
+✔  readme-file-exists: Found file (README.md)
+✔  contributing-file-exists: Found file (CONTRIBUTING)
+✔  code-of-conduct-file-exists: Found file (CODE-OF-CONDUCT)
+✔  changelog-file-exists: Found file (CHANGELOG)
+✔  security-file-exists: Found file (SECURITY.md)
+✔  support-file-exists: Found file (SUPPORT)
+✔  readme-references-license: Contains license (README.md)
+✔  binaries-not-present: Excluded file type doesn't exist (**/*.exe,**/*.dll,!node_modules/**)
+✔  test-directory-exists: Found file (test)
+✔  integrates-with-ci: Found file (.gitlab-ci.yml)
+✖  code-of-conduct-file-contains-email: Doesn't contain email address (CODE-OF-CONDUCT)
+⚠  source-license-headers-exist: Did not find file matching the specified patterns
+	⚠ **/*.js
+	⚠ !node_modules/**
+✔  github-issue-template-exists: Found file (ISSUE_TEMPLATE)
+✔  github-pull-request-template-exists: Found file (PULL_REQUEST_TEMPLATE)
+ℹ javascript-package-metadata-exists: ignored due to unsatisfied condition(s): "language=javascript"
+ℹ ruby-package-metadata-exists: ignored due to unsatisfied condition(s): "language=ruby"
+ℹ java-package-metadata-exists: ignored due to unsatisfied condition(s): "language=java"
+ℹ python-package-metadata-exists: ignored due to unsatisfied condition(s): "language=python"
+ℹ objective-c-package-metadata-exists: ignored due to unsatisfied condition(s): "language=objective-c"
+ℹ swift-package-metadata-exists: ignored due to unsatisfied condition(s): "language=swift"
+ℹ erlang-package-metadata-exists: ignored due to unsatisfied condition(s): "language=erlang"
+ℹ elixir-package-metadata-exists: ignored due to unsatisfied condition(s): "language=elixir"
+ℹ license-detectable-by-licensee: ignored because level is "off"
+ℹ notice-file-exists: ignored due to unsatisfied condition(s): "license=Apache-2.0"
+ℹ best-practices-badge-present: ignored because level is "off"
