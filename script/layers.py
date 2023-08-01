@@ -6,6 +6,7 @@ from text_generation_server.utils.gptq.quant_linear import QuantLinear
 from accelerate import init_empty_weights
 import torch
 import torch.distributed
+import os
 
 from torch import nn
 from torch.nn import functional as F
@@ -372,7 +373,7 @@ try:
             self._cos_k_cached = None
             self._sin_k_cached = None
             self.init_base = None
-            self.max_position_embeddings = 2048
+            self.max_position_embeddings = int(os.getenv("PRETRAINED_MAX_TOKENS", 2048))
             self.head_dim = None
 
         @classmethod
@@ -399,27 +400,30 @@ try:
             # https://www.reddit.com/r/LocalLLaMA/comments/14lz7j5/ntkaware_scaled_rope_allows_llama_models_to_have/
             # https://www.reddit.com/r/LocalLLaMA/comments/14mrgpr/dynamically_scaled_rope_further_increases/
             # https://github.com/jquesnelle/scaled-rope/blob/master/scaled_rope/LlamaDynamicScaledRotaryEmbedding.py
+            if seq_len <= self.max_position_embeddings:
+                return self.inv_freq
+            alpha_scaler = float(os.getenv("DNTK_ALPHA_SCALER", 1.0))
             base = self.init_base * \
-                (seq_len / self.max_position_embeddings) ** (self.head_dim /
+                (seq_len / alpha_scaler / self.max_position_embeddings) ** (self.head_dim /
                                                              (self.head_dim - 2))
-            self.inv_freq = 1.0 / (base ** (torch.arange(0, self.head_dim,
+            return 1.0 / (base ** (torch.arange(0, self.head_dim,
                                    2, device=device, dtype=torch.float32) / self.head_dim))
 
         def _update_cos_sin_cache(self, dtype, device, seqlen):
             # Reset the tables if the sequence length has changed,
             # or if we're on a new device (possibly due to tracing for instance)
             if (
-                seqlen > self._seq_len_cached
+                seqlen != self._seq_len_cached
                 or self._cos_cached.device != device
                 or self._cos_cached.dtype != dtype
             ):
                 self._seq_len_cached = seqlen
-                self._update_base_inv_freq_ntk(seqlen, device)
+                updated_inv_freq = self._update_base_inv_freq_ntk(seqlen, device)
                 t = torch.arange(seqlen, device=device,
                                  dtype=self.inv_freq.dtype)
                 # Don't do einsum, it converts fp32 to fp16
                 # freqs = torch.einsum("i,j->ij", t, self.inv_freq)
-                freqs = torch.outer(t, self.inv_freq.to(device=t.device))
+                freqs = torch.outer(t, updated_inv_freq.to(device=t.device))
                 self._cos_cached = torch.cos(freqs).to(dtype)
                 self._sin_cached = torch.sin(freqs).to(dtype)
 
