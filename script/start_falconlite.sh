@@ -1,4 +1,4 @@
-export model=/data/long-falcon-40b-oa-4bit
+export model=/data/amazon--falconlite
 export num_shard=8
 export volume=/home/ubuntu/model # share a volume with the Docker container to avoid downloading weights every run
 
