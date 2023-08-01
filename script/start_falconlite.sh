@@ -1,5 +1,5 @@
-export model=/data/amazon--falconlite
-export num_shard=8
+export model=amazon/FalconLite
+export num_shard=4
 export volume=/home/ubuntu/model # share a volume with the Docker container to avoid downloading weights every run
 
 export max_input_length=12000 

@@ -4,7 +4,6 @@ SERVER_PORT = 443 # e.g. check `falconlite_tgi_port` in start_falconlite.sh
 SERVER_HOST = "localhost"
 SERVER_URL = f"{SERVER_HOST}:{SERVER_PORT}"
 oa_client = Client(f"http://{SERVER_URL}", timeout=60)
-model_id = "amazon/FalconLite"
 
 def invoke_falconlite(prompt, 
                       random_seed=1, 
