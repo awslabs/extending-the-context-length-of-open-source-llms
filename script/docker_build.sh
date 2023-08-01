@@ -1,0 +1,1 @@
+docker build -t falcon-lctx:0.9.2 .
