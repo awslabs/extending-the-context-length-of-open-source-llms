@@ -27,7 +27,7 @@ def invoke_falconlite(prompt,
                 snippet = response.token.text
                 output += snippet
                 if (print_stream):
-                    print(snippet, end='')
+                    print(snippet, end='', flush=True)
     return output
 
 if __name__ == "__main__":
