@@ -1,0 +1,4 @@
+FROM ghcr.io/huggingface/text-generation-inference:1.0.3
+
+COPY flash_rw_modeling.py /opt/conda/lib/python3.9/site-packages/text_generation_server/models/custom_modeling/flash_rw_modeling.py
+COPY flash_rw.py /opt/conda/lib/python3.9/site-packages/text_generation_server/models/flash_rw.py
