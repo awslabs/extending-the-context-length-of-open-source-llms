@@ -49,20 +49,19 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 
 RUN /opt/conda/bin/conda install -c "nvidia/label/cuda-11.8.0"  cuda==11.8 && \
     /opt/conda/bin/conda clean -ya
-#as vllm-builder
-# # Conda env
-# ENV PATH=/opt/conda/bin:$PATH \
-#     CONDA_PREFIX=/opt/conda
 
-# RUN apt-get update -q
-# RUN apt-get install -y git
-# #RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nvidia-cuda-toolkit
-# RUN DEBIAN_FRONTEND=noninteractive apt-get install -y cuda-11.8
-# # Re-Build vllm CUDA kernels
+# Re-Build vllm CUDA kernels
 WORKDIR /usr/src
 COPY vllm/Makefile-vllm Makefile
 
-# # Build specific version of vllm
+# Obtain the version of vllm as per TGI 1.0.3
+RUN make vllm
+# Copy bug fixes for issue https://github.com/vllm-project/vllm/issues/905
+COPY vllm/attention_kernels.cu /usr/src/vllm/csrc/attention/attention_kernels.cu
+COPY vllm/test_attention.py /usr/src/vllm/tests/kernels/test_attention.py
+COPY vllm//utils.py  /usr/src/vllm/vllm/utils.py
+COPY vllm/worker.py /usr/src/vllm/vllm/worker/worker.py
+# Re-build vllm as per the fix
 RUN make build-vllm
 
 FROM ghcr.io/huggingface/text-generation-inference:1.0.3

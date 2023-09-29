@@ -2,11 +2,12 @@ vllm_commit := d284b831c17f42a8ea63369a06138325f73c4cf9
 
 vllm:
     # Clone vllm
-	git clone --branch tgi-1.0.3 https://github.com/chenwuperth/vllm-tgi.git vllm
+	git clone https://github.com/OlivierDehaene/vllm.git
+	cd vllm && git fetch && git checkout $(vllm_commit)
 
-build-vllm: vllm
-	cd vllm && /opt/conda/bin/python setup.py build
+build-vllm:
+	cd vllm && python setup.py build
 
 install-vllm: build-vllm
-	/opt/conda/bin/pip uninstall vllm -y || true
-	cd vllm && /opt/conda/bin/python setup.py install
+	pip uninstall vllm -y || true
+	cd vllm && python setup.py install
