@@ -1,3 +1,6 @@
+# This file is adapted from TGI 1.0.3 Dockerfile https://github.com/huggingface/text-generation-inference/blob/v1.0.3/Dockerfile
+# Licensed under Hugging Face Optimized Inference License 1.0 https://github.com/huggingface/text-generation-inference/blob/v1.0.3/LICENSE
+
 FROM debian:bullseye-slim as pytorch-install
 
 ARG PYTORCH_VERSION=2.0.1
