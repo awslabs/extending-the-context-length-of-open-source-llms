@@ -69,5 +69,5 @@ FROM ghcr.io/huggingface/text-generation-inference:1.0.3
 # Copy builds artifacts from vllm builder
 COPY --from=kernel-builder /usr/src/vllm/build/lib.linux-x86_64-cpython-39 /opt/conda/lib/python3.9/site-packages
 
-COPY flash_rw_modeling.py /opt/conda/lib/python3.9/site-packages/text_generation_server/models/custom_modeling/flash_rw_modeling.py
-COPY flash_rw.py /opt/conda/lib/python3.9/site-packages/text_generation_server/models/flash_rw.py
+RUN sed -i '250s/.*/           config=config, dim=self.head_size, base=1000000.0, device=weights.device/' /opt/conda/lib/python3.9/site-packages/text_generation_server/models/custom_modeling/flash_rw_modeling.py
+RUN sed -i '57s/.*/            aliases={"lm_head.weight": ["transformer.word_embeddings.weight"], "transformer.word_embeddings.weight": ["lm_head.weight"]},/' /opt/conda/lib/python3.9/site-packages/text_generation_server/models/flash_rw.py
