@@ -1,3 +1,8 @@
+---
+license: apache-2.0
+inference: false
+---
+
 # FalconLite2 Model
 
 FalconLit2 is a fine-tuned and quantized [Falcon 40B](https://huggingface.co/tiiuae/falcon-40b) language model, capable of processing long (up to 24K tokens) input sequences. By utilizing 4-bit [GPTQ quantization](https://github.com/PanQiWei/AutoGPTQ) and adapted RotaryEmbedding, FalconLite2 is able to process 10x longer contexts while consuming 4x less GPU memory than the original model. FalconLite2 is useful for applications such as topic retrieval, summarization, and question-answering. FalconLite2 can be deployed on a single AWS `g5.12x` instance with [TGI 1.0.3](https://github.com/huggingface/text-generation-inference/tree/v1.0.3), making it suitable for applications that require high performance in resource-constrained environments.
