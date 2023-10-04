@@ -55,17 +55,20 @@ RUN /opt/conda/bin/conda install -c "nvidia/label/cuda-11.8.0"  cuda==11.8 && \
 
 # Re-Build vllm CUDA kernels
 WORKDIR /usr/src
-COPY vllm/Makefile-vllm Makefile
-
+RUN git clone https://github.com/OlivierDehaene/vllm.git
+WORKDIR /usr/src/vllm
+RUN git fetch
 # Obtain the version of vllm as per TGI 1.0.3
-RUN make vllm
+RUN git checkout d284b831c17f42a8ea63369a06138325f73c4cf9
+
 # Copy bug fixes for issue https://github.com/vllm-project/vllm/issues/905
 COPY vllm/attention_kernels.cu /usr/src/vllm/csrc/attention/attention_kernels.cu
 COPY vllm/test_attention.py /usr/src/vllm/tests/kernels/test_attention.py
 COPY vllm//utils.py  /usr/src/vllm/vllm/utils.py
 COPY vllm/worker.py /usr/src/vllm/vllm/worker/worker.py
+
 # Re-build vllm as per the fix
-RUN make build-vllm
+RUN python setup.py build
 
 FROM ghcr.io/huggingface/text-generation-inference:1.0.3
 
