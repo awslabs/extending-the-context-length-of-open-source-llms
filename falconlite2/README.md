@@ -54,7 +54,7 @@ python falconlite_client.py -l
 **Important** - When using FalconLite2 for inference for the first time, it may require a brief 'warm-up' period that can take 10s of seconds. However, subsequent inferences should be faster and return results in a more timely manner. This warm-up period is normal and should not affect the overall performance of the system once the initialisation period has been completed.
 
 ## Evalution Result ##
-We evaluated FalconLite against benchmarks that are specifically designed to assess the capabilities of LLMs in handling longer contexts. All evaluations were conducted without fine-tuning the model.
+We evaluated FalconLite against benchmarks that are specifically designed to assess the capabilities of LLMs in handling longer contexts.
 
 ### Accuracy ###
 |Eval task|Input length| Input length | Input length| Input length| Input length|
