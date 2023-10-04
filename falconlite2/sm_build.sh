@@ -19,7 +19,7 @@ then
     aws ecr create-repository --repository-name $REPO_NAME --region $REGION
 fi
 
-docker build -t $REPO_NAME .
+docker build -f Dockerfile_sm  -t $REPO_NAME .
 
 docker tag $REPO_NAME:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:latest
 
