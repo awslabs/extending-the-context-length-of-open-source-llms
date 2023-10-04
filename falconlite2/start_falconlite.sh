@@ -1,6 +1,6 @@
-export model=/data 
+export model=amazon/FalconLite2 
 export num_shard=4
-export volume=/home/ubuntu/model/falcon-lite2 # where model is downloaded to
+export volume=/home/ubuntu/model # where model is downloaded to
 
 export max_input_length=24000 #20479  #16383
 export max_total_tokens=24576 #20480  #16384
