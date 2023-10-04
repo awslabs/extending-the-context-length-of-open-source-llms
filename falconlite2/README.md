@@ -5,13 +5,13 @@ inference: false
 
 # FalconLite2 Model
 
-FalconLit2 is a fine-tuned and quantized [Falcon 40B](https://huggingface.co/tiiuae/falcon-40b) language model, capable of processing long (up to 24K tokens) input sequences. By utilizing 4-bit [GPTQ quantization](https://github.com/PanQiWei/AutoGPTQ) and adapted RotaryEmbedding, FalconLite2 is able to process 10x longer contexts while consuming 4x less GPU memory than the original model. FalconLite2 is useful for applications such as topic retrieval, summarization, and question-answering. FalconLite2 can be deployed on a single AWS `g5.12x` instance with [TGI 1.0.3](https://github.com/huggingface/text-generation-inference/tree/v1.0.3), making it suitable for applications that require high performance in resource-constrained environments.
+FalconLit2 is a fine-tuned and quantized [Falcon 40B](https://huggingface.co/tiiuae/falcon-40b) language model, capable of processing long (up to 24K tokens) input sequences. By utilizing 4-bit [GPTQ quantization](https://github.com/PanQiWei/AutoGPTQ) and adapted RotaryEmbedding, FalconLite2 is able to process 10x longer contexts while consuming 4x less GPU memory than the original model. FalconLite2 is useful for applications such as topic retrieval, summarization, and question-answering. FalconLite2 can be deployed on a single AWS `g5.12x` instance with [TGI 1.0.3](https://github.com/huggingface/text-generation-inference/tree/v1.0.3), making it suitable for applications that require high performance in resource-constrained environments. You can also deploy FalconLite2 directly on SageMaker endpoints.
 
 FalconLite2 evolves from [FalconLite](https://huggingface.co/amazon/FalconLite), and their similarities and differences are summarized below:
-|Model|Fine-tuned on long contexts| Quantization | Max context length| RotaryEmbedding adaptation|
-|----------|-------------:|-------------:|------------:|-----------:|
-| FalconLite | No | 4-bit GPTQ |12K | [dNTK](https://www.reddit.com/r/LocalLLaMA/comments/14mrgpr/dynamically_scaled_rope_further_increases/) |
-| FalconLite2 | Yes | 4-bit GPTQ |24K | rope_theta = 1000000 |
+|Model|Fine-tuned on long contexts| Quantization | Max context length| RotaryEmbedding adaptation| Inference framework|
+|----------|-------------:|-------------:|------------:|-----------:|-----------:|
+| FalconLite | No | 4-bit GPTQ |12K | [dNTK](https://www.reddit.com/r/LocalLLaMA/comments/14mrgpr/dynamically_scaled_rope_further_increases/) | TGI 0.9.2 |
+| FalconLite2 | Yes | 4-bit GPTQ |24K | rope_theta = 1000000 | TGI 1.0.3 |
 
 ## Model Details
 
@@ -20,11 +20,11 @@ FalconLite2 evolves from [FalconLite](https://huggingface.co/amazon/FalconLite),
 - **Language:** English
 - **Finetuned from weights:** [Falcon 40B SFT OASST-TOP1 model](https://huggingface.co/OpenAssistant/falcon-40b-sft-top1-560)
 - **Finetuned on data:** [SLidingEncoder and Decoder (SLED)](https://huggingface.co/datasets/tau/sled) and [(Long) Natural Questions (NQ)](https://huggingface.co/datasets/togethercomputer/Long-Data-Collections#multi-passage-qa-from-natural-questions)
-- **Deployed using framework:** [Text-Generation-Inference 1.0.3](https://github.com/huggingface/text-generation-inference/tree/v1.0.3)
+- **Served using framework:** [Text-Generation-Inference 1.0.3](https://github.com/huggingface/text-generation-inference/tree/v1.0.3)
 - **Model License:** Apache 2.0
 - **Contact:** [GitHub issues](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/issues)
 
-## Deploy FalconLite ##
+## Deploy FalconLite2 on EC2 ##
 SSH login to an AWS `g5.12x` instance with the [Deep Learning AMI](https://aws.amazon.com/releasenotes/aws-deep-learning-ami-gpu-pytorch-2-0-ubuntu-20-04/).
 
 ### Start TGI server
@@ -43,7 +43,8 @@ pip install -r requirements-client.txt
 # test short context
 python falconlite_client.py
 
-# test long context (13400 tokens)
+# test long context of 13400 tokens, 
+# which are copied from [Amazon Aurora FAQs](https://aws.amazon.com/rds/aurora/faqs/)
 python falconlite_client.py -l
 ```
 **Important** - Use the prompt template below for FalconLite2:
@@ -53,8 +54,11 @@ python falconlite_client.py -l
 
 **Important** - When using FalconLite2 for inference for the first time, it may require a brief 'warm-up' period that can take 10s of seconds. However, subsequent inferences should be faster and return results in a more timely manner. This warm-up period is normal and should not affect the overall performance of the system once the initialisation period has been completed.
 
+## Deploy FalconLite2 on Amazon SageMaker ##
+To deploy FalconLite2 on a SageMaker endpoint, please follow [this notebook](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/blob/main/falconlite2/sm_deploy.ipynb) running on a SageMaker Notebook instance (e.g. `g5.xlarge`).
+
 ## Evalution Result ##
-We evaluated FalconLite against benchmarks that are specifically designed to assess the capabilities of LLMs in handling longer contexts.
+We evaluated FalconLite2 against benchmarks that are specifically designed to assess the capabilities of LLMs in handling longer contexts.
 
 ### Accuracy ###
 |Eval task|Input length| Input length | Input length| Input length| Input length|
