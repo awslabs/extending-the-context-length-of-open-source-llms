@@ -38,7 +38,7 @@ cd falconlite-dev/falconlite2
 ### Perform inference
 ```bash
 # after FalconLite has been completely started
-pip install -r requirements-client.txt
+pip install -r ../script/requirements-client.txt
 
 # test short context
 python falconlite_client.py
