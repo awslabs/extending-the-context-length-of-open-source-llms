@@ -16,4 +16,4 @@ inference: false
 - How to Serve MistralFlite on [HuggingFace Text Generation Inference (TGI) container on SageMaker](https://github.com/awslabs/llm-hosting-container)
     - Built-in Container: [an example Jupyter notebook](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/blob/main/MistralLite/sagemaker-tgi/example_usage.ipynb)
     - Custom Container supporting context length greater than 12K tokens: [an example Jupyter notebook](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/blob/main/MistralLite/sagemaker-tgi-custom/example_usage.ipynb)
-- How to Serve MistralFlite on [vLLM](https://github.com/vllm-project/vllm): [an example Jupyter notebook](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/tree/main/MistralLite/vllm)
+- How to Serve MistralFlite on [vLLM](https://github.com/vllm-project/vllm): [an example Jupyter notebook](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/tree/main/MistralLite/vllm/example_usage.ipynb)
