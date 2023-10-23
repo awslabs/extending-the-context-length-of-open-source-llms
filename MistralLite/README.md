@@ -13,11 +13,31 @@ MistralLite is similar to [Mistral-7B-Instruct-v0.1](https://huggingface.co/mist
 | Mistral-7B-Instruct-v0.1 | up to 8K tokens | 32K | rope_theta = 10000 | 4096 |
 | MistralLite | up to 16K tokens | 32K | **rope_theta = 1000000** | **16384** |
 
+## MistralLite Quickstart Examples
+
+There are many ways you can deploy and interact with MistralLite. This repository has example guides on deploying and interacting with the LLM in the following Jupyter notebook guides:
+
+> **Note:** All example notebooks are suggested to run on a `ml.g5.2xlarge` [Amazon SageMaker notebook instance](https://docs.aws.amazon.com/sagemaker/latest/dg/nbi.html)
+
+- Serving via **[HuggingFace transformers](https://huggingface.co/docs/transformers/index)**
+  - [Example notebook](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/blob/main/MistralLite/huggingface-transformers/example_usage.ipynb)
+- Serving via **[Amazon SageMaker Endpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html)**
+  - [Example notebook with built-in container](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/tree/main/MistralLite/sagemaker-tgi/example_usage.ipynb)
+  - [Example notebook for custom container supporting context length greater than 12K tokens](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/tree/main/MistralLite/sagemaker-tgi-custom/example_usage.ipynb)
+- Serving via **[HuggingFace Text Generation Inference (TGI) Container](https://huggingface.co/docs/text-generation-inference/index)**
+  - [Example notebook](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/blob/main/MistralLite/tgi/example_usage.ipynb)
+  - [Example notebook for custom container supporting context length greater than 12K tokens](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/blob/main/MistralLite/tgi-custom/example_usage.ipynb)
+- Serving via **[vLLM](https://vllm.ai)**
+  - [Example notebook](https://github.com/awslabs/extending-the-context-length-of-open-source-llms/blob/main/MistralLite/vllm/example_usage.ipynb)
+
+ 
+
+
 ## Motivation of Developing MistralLite
 
 Since the release of [Mistral-7B-Instruct-v0.1](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1), the model became increasingly popular because its strong performance 
 on a wide range of benchmarks. But most of the benchmarks are evaluated on `short context`, and not much has been investigated on its performance on long context tasks.
-Then We evaluated `Mistral-7B-Instruct-v0.1` against benchmarks that are specifically designed to assess the capabilities of LLMs in handling longer context. 
+Then we evaluated `Mistral-7B-Instruct-v0.1` against benchmarks that are specifically designed to assess the capabilities of LLMs in handling longer context. 
 Although the performance of the models on long context was fairly competitive on long context less than 4096 tokens, 
 there were some limitations on its performance on longer context. Motivated by improving its performance on longer context, we finetuned the Mistral 7B model, and produced `Mistrallite`. The model managed to `significantly boost the performance of long context handling` over Mistral-7B-Instruct-v0.1. The detailed `long context evalutaion results` are as below: 
 
