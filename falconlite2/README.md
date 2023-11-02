@@ -35,6 +35,15 @@ cd falconlite-dev/falconlite2
 ./docker_build.sh
 ./start_falconlite.sh
 ```
+### Start TGI server-1.1.0
+```bash
+git clone https://github.com/awslabs/extending-the-context-length-of-open-source-llms.git falconlite-dev
+cd falconlite-dev/falconlite2-tgi1.1.0
+# this may take a while to build updated vLLM CUDA kernels
+./docker_build_rebuild_vllm_rope-theta.sh
+./start_falconlite.sh
+```
+
 ### Perform inference
 ```bash
 # after FalconLite has been completely started
