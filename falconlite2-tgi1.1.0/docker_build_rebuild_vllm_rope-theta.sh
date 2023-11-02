@@ -1,0 +1,1 @@
+docker build -f Dockerfile_rebuild_vllm_rope-theta -t falcon-lctx:1.1.0 .
