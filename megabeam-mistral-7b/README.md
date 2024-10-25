@@ -15,7 +15,7 @@ VLLM_ENGINE_ITERATION_TIMEOUT_S=3600 python3 -m vllm.entrypoints.openai.api_serv
 ```
 
 ### Obtain long context document
-Download the entire [Mistral Inference git repo](https://github.com/mistralai/mistral-inference). Use this file as the long context, which has 211,501 tokens. Here we are using the awesome [unithub's OpenAPI](https://uithub.com/openapi.html#/) to download the github content.
+Download the entire [Mistral Inference git repo](https://github.com/mistralai/mistral-inference) as a single file. Use this file as the long context, which has 211,501 tokens. Here we are using the awesome [unithub's OpenAPI](https://uithub.com/openapi.html#/) to download the github content.
 ```bash
 wget -O mistral_repo_content.txt https://uithub.com/mistralai/mistral-inference?accept=text%2Fplain
 ```
