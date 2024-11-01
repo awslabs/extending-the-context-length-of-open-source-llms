@@ -1,0 +1,7 @@
+torch
+transformers
+torchaudio
+pydub
+openai
+huggingface_hub
+fastapi
