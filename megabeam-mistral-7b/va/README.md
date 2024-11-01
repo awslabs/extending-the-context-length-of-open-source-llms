@@ -46,5 +46,5 @@ huggingface-cli download myshell-ai/MeloTTS-English
 export DOWNLOAD_DIR=~/Downloads
 echo  "from ${DOWNLOAD_DIR}/MegaBeam-Mistral-7B-300k.Q2_K.gguf" > Modefile
 ollama create megabeam300k -f Modelfile
-ollma run megabeam300k
+ollama run megabeam300k
 ```
