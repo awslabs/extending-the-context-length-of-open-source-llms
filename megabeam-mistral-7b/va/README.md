@@ -1,6 +1,6 @@
 This example show cases an end-to-end voice-assistant (VA) powered by the [amazon/MegaBeam-Mistral-7B-300k](https://huggingface.co/amazon/MegaBeam-Mistral-7B-300k) open LLM.
 
-```bash
+```
 +------+     +--------+     +-----+     +-----+     +-----+     +--------+
 |      |     |        |     |     |     |     |     |     |     |        |
 | User | --> | Speech | --> | ASR | --> | LLM | --> | TTS | --> | Speech |
