@@ -1,4 +1,4 @@
-This example show cases an end-to-end voice-assistant (VA) powered by the [amazon/MegaBeam-Mistral-7B-300k](https://huggingface.co/amazon/MegaBeam-Mistral-7B-300k) open LLM.
+This example is an end-to-end voice-assistant (VA) powered by the [amazon/MegaBeam-Mistral-7B-300k](https://huggingface.co/amazon/MegaBeam-Mistral-7B-300k) open LLM.
 
 ```
 +------+     +--------+     +-----+     +-----+     +-----+     +--------+
@@ -9,6 +9,11 @@ This example show cases an end-to-end voice-assistant (VA) powered by the [amazo
    ^                                                                 |
    |                                                                 |
    +-----------------------------------------------------------------+
+```
+## Clone this git repository
+```bash
+git clone https://github.com/awslabs/extending-the-context-length-of-open-source-llms.git
+cd extending-the-context-length-of-open-source-llms/megabeam-mistral-7b/va
 ```
 
 ## Setup instructions
@@ -30,6 +35,7 @@ source ~/venv/megabeam-va-demo/bin/activate
 ```bash
 pip install -r requirements.txt
 
+cd
 git clone https://github.com/myshell-ai/MeloTTS.git
 cd MeloTTS
 pip install -e .
@@ -58,4 +64,10 @@ export DOWNLOAD_DIR=~/Downloads
 echo  "from ${DOWNLOAD_DIR}/MegaBeam-Mistral-7B-300k.Q2_K.gguf" > Modefile
 ollama create megabeam300k -f Modelfile
 ollama run megabeam300k
+```
+
+## Run 
+```bash
+cd ~/extending-the-context-length-of-open-source-llms/megabeam-mistral-7b/va
+chainlit run chainlit_app.py
 ```
