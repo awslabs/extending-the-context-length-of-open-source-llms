@@ -11,8 +11,8 @@ This example is an end-to-end voice-assistant (VA) powered by the [amazon/MegaBe
    +-----------------------------------------------------------------+
 ```
 ## Install codec for audio streaming
-On linux, downnload and install [ffprobe](https://ffmpeg.org/ffprobe.html).
-For MacOS / Windows, download and install [ffmpeg](https://ffmpeg.org/download.html)
+On linux, install [ffprobe](https://ffmpeg.org/ffprobe.html).
+For MacOS / Windows, install [ffmpeg](https://ffmpeg.org/download.html)
 
 
 ## Clone this git repository
