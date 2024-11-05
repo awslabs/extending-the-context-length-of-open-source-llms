@@ -5,4 +5,4 @@ pydub
 openai
 huggingface_hub
 fastapi
-chainlit
+chainlit>=1.3.1
