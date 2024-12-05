@@ -5,3 +5,4 @@ loguru==0.7.2
 decord==0.6.0
 accelerate==0.33.0
 bitsandbytes==0.43.3
+fastapi==0.112.2
