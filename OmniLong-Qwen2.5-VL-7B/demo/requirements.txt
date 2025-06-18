@@ -1,5 +1,4 @@
 gradio
-torch
 transformers
 pytube
 opencv-python
@@ -10,3 +9,4 @@ torchvision
 flash-attn
 spaces
 num2words
+qwen_vl_utils
