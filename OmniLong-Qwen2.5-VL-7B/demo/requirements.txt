@@ -1,0 +1,12 @@
+gradio
+transformers
+pytube
+opencv-python
+pillow
+bitsandbytes
+accelerate
+torchvision
+flash-attn
+spaces
+num2words
+qwen_vl_utils
